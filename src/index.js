@@ -1,17 +1,69 @@
-import React from 'react';
+
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState, Component } from 'react';
+import ClassClock from './ClassClock';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('viego')
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+function Clock() {
+  
+  let [ date, setDate ] = useState(new Date().toLocaleString());
+  
+  setInterval(() => {
+    setDate(new Date().toLocaleString());
+  },1000)
+
+  
+
+
+  return (
+    <div>
+      <h1>Hello World!</h1>
+      <h2>It is { date }</h2>
+    </div>
+  )
+}
+
+class ToggleClassVer extends Component {
+  constructor(props) {
+    super(props) // this.props = props;
+    // this.handleClick = this.handleClick.bind(this);
+    this.state = { switched: false };
+  }
+
+  handleClick() {
+    console.log(this);
+    this.setState({ switched: !this.state.switched });
+  }
+
+  render() {
+    console.log("its rendered again!");
+    return (
+      <button onClick={this.handleClick.bind(this)}>{ this.state.switched ? "on" : "off"}</button>
+    )
+  }
+}
+
+function Toggle() {
+
+  const [switched, setSwitched] = useState(false);
+  function handleClick() {
+    setSwitched(!switched);
+  }
+  return (
+    <button onClick={handleClick}>{ switched ? "on" : "off"}</button>
+  )
+}
+
+
+
+
+ReactDOM.render(<Toggle />, document.getElementById('root'));
+
+// setTimeout(() => {
+//   ReactDOM.render(<div>Its Gone! check timer</div>, document.getElementById('root'));
+// }, 5000)
+
+
+
+
